@@ -64,18 +64,22 @@ namespace GeolocationApp.ViewModel
                     IsBusy = true;
 
                     var locator = CrossGeolocator.Current;
-                    locator.DesiredAccuracy = 50;
+                    if (locator.IsGeolocationEnabled)
+                    {
 
-                    var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
-                    if (position == null)
-                        return;
+                        locator.DesiredAccuracy = 50;
 
-                    var gn = new GeoNames(position.Latitude, position.Longitude);
-                    var code = await gn.CountryCode();
-                    Items.Clear();
-                    var res = await gn.CountryInfo(code);
+                        var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
+                        if (position == null)
+                            return;
 
-                    Items.Add(res);
+                        var gn = new GeoNames(position.Latitude, position.Longitude);
+                        var code = await gn.CountryCode();
+                        Items.Clear();
+                        var res = await gn.CountryInfo(code);
+
+                        Items.Add(res);
+                    }
                 }
                 catch (Exception ex)
                 {
