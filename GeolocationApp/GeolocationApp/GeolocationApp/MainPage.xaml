@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:GeolocationApp"
              x:Class="GeolocationApp.MainPage">
 
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+<StackLayout Orientation="Vertical">
+    <Button Text="Probar"></Button>
+</StackLayout>
 
 </ContentPage>
