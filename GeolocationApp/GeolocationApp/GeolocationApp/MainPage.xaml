@@ -1,11 +1,215 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:GeolocationApp"
+             xmlns:viewModel="clr-namespace:GeolocationApp.ViewModel;assembly=GeolocationApp"
              x:Class="GeolocationApp.MainPage">
 
-<StackLayout Orientation="Vertical">
-    <Button Text="Probar"></Button>
-</StackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelProperties" TargetType="Label">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontFamily" Value="Bold"></Setter>
+                <Setter Property="TextColor" Value="#2c3e50"></Setter>
+            </Style>
+            <Style x:Key="LabelProperties2" TargetType="Label">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontFamily" Value="Bold"></Setter>
+                <Setter Property="TextColor" Value="#2980b9"></Setter>
+            </Style>
+            <Style x:Key="FrameProperties" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#ecf0f1"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:GeoLocationViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <ListView x:Name="ListView"
+              HasUnevenRows="True"
+              BackgroundColor="#e5e5e5"
+              SeparatorVisibility="None"            
+              ItemsSource="{Binding Items,Mode=OneWay}"
+              RefreshCommand="{Binding RefreshCommand}"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              
+              IsPullToRefreshEnabled="True"
+              VerticalOptions="FillAndExpand" >
+        <ListView.Header>
+            <StackLayout Padding="10,5,0,5" BackgroundColor="Beige">
+                <Label Text="Maximiliano Villa Limon" />
+                <Label Text="max_210291@hotmail.com"/>
+            </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame Padding="10,5,10,5" OutlineColor="Silver" HasShadow="True" BackgroundColor="White">
+
+                        <StackLayout Orientation="Vertical" BackgroundColor="#ecf0f1" Padding="0,0,0,0" >
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Country Name"  />
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding countryName,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Capital"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding capital,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Continent Name"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding continentName,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Area In Sq Km"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding areaInSqKm,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Languages"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding languages,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Currency Code"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding currencyCode,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+
+
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Geoname Id"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding geonameId,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="South"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding south,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="isoAlpha3"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding isoAlpha3,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="North"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding north,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="fips Code"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding fipsCode,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+
+
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="Population"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding population,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="East"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding east,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="iso Numeric"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding isoNumeric,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            <Frame Padding="10,0,0,0" Style="{StaticResource FrameProperties}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Style="{StaticResource LabelProperties}" Text="West"/>
+                                    <Label Grid.Column="1" Style="{StaticResource LabelProperties2}" Text="{Binding west,Mode= OneWay}"/>
+                                </Grid>
+                            </Frame>
+                            
+                        </StackLayout>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 
 </ContentPage>
